@@ -44,7 +44,6 @@ end
 
 function util.smoother_next(direction)
 	local is_farthest_right, is_bottom_most = util.is_farthest_right_bottom_most()
-	print("1. right, bottom ", is_farthest_right, is_bottom_most)
 	-- [][() (x)]
 	if is_farthest_right then
 		util.tmux_change_pane(direction)
@@ -61,9 +60,7 @@ function util.smoother_next(direction)
 	elseif is_farthest_right and is_bottom_most then
 		print("farthest right and bottom most")
 		util.tmux_change_pane(direction)
-		-- vim.fn.system("tmux -S " .. tmux_socket .. " " .. command)
 		pcall(vim.cmd, "wincmd p")
-		print("go to first after")
 	else
 		pcall(vim.cmd, "wincmd w")
 	end
