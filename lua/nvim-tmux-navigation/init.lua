@@ -1,4 +1,5 @@
 local util = require'nvim-tmux-navigation.tmux_util'
+local vim_util = require'nvim-tmux-navigation.vim_windows_util'
 
 local M = {}
 
@@ -10,7 +11,7 @@ local config = {
 
 local function vim_navigate(direction)
     if direction == 'n' then
-        pcall(vim.cmd, 'wincmd w')
+        vim_util.smoother_next(direction)
     elseif pcall(vim.cmd, 'wincmd ' .. direction) then
         -- success
     else
