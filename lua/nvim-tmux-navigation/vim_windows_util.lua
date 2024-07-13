@@ -44,16 +44,7 @@ end
 
 function util.smoother_next(direction)
 	local is_farthest_right, is_bottom_most = util.is_farthest_right_bottom_most()
-	-- [][() (x)]
-	if is_farthest_right then
-		util.tmux_change_pane(direction)
-		pcall(vim.cmd, "wincmd w")
-		-- [][(x) ()]
-	elseif not is_farthest_right then
-		pcall(vim.cmd, "wincmd w")
-		-- [][() (x)]
-		-- [][() ( )]
-	elseif is_farthest_right and not is_bottom_most then
+	if is_farthest_right and not is_bottom_most then
 		pcall(vim.cmd, "wincmd w")
 		-- [][() ( )]
 		-- [][() (x)]
@@ -61,6 +52,15 @@ function util.smoother_next(direction)
 		print("farthest right and bottom most")
 		util.tmux_change_pane(direction)
 		pcall(vim.cmd, "wincmd p")
+	-- [][() (x)]
+	elseif is_farthest_right then
+		util.tmux_change_pane(direction)
+		pcall(vim.cmd, "wincmd w")
+		-- [][(x) ()]
+	elseif not is_farthest_right then
+		pcall(vim.cmd, "wincmd w")
+		-- [][() (x)]
+		-- [][() ( )]
 	else
 		pcall(vim.cmd, "wincmd w")
 	end
