@@ -20,6 +20,10 @@ local function vim_navigate(direction)
     end
 end
 
+local function move(direction)
+    util.tmux_move_window(direction)
+end
+
 -- whether tmux should control the previous pane switching or no
 --
 -- by default it's true, so when you enter a new vim instance and
@@ -120,5 +124,7 @@ create_command("NvimTmuxNavigateUp", navigate, 'k')
 create_command("NvimTmuxNavigateRight", navigate, 'l')
 create_command("NvimTmuxNavigateLastActive", navigate, 'p')
 create_command("NvimTmuxNavigateNext", navigate, 'n')
+create_command("NvimTmuxTabLeft", move, 'h')
+create_command("NvimTmuxTabRight", move, 'l')
 
 return M

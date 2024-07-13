@@ -31,6 +31,14 @@ function util.tmux_change_pane(direction)
     tmux_command("select-pane -" .. tmux_directions[direction])
 end
 
+function util.tmux_move_window(direction)
+    if direction == 'l' then
+        tmux_command("next-window")
+    elseif direction == 'h' then
+        tmux_command("previous-window")
+    end
+end
+
 -- capitalization util, only capitalizes the first character of the whole word
 function util.capitalize(str)
     local capitalized = str:gsub("(%a)(%a+)", function(a, b)
