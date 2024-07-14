@@ -1,4 +1,5 @@
 ---@diagnostic disable: param-type-mismatch
+local tmux_util = require("nvim-tmux-navigation.tmux_util")
 local util = {}
 
 function util.is_farthest_right_bottom_most()
@@ -50,11 +51,11 @@ function util.smoother_next(direction)
 		-- [][() (x)]
 	elseif is_farthest_right and is_bottom_most then
 		print("farthest right and bottom most")
-		util.tmux_change_pane(direction)
+		tmux_util.tmux_change_pane(direction)
 		pcall(vim.cmd, "wincmd p")
 	-- [][() (x)]
 	elseif is_farthest_right then
-		util.tmux_change_pane(direction)
+		tmux_util.tmux_change_pane(direction)
 		pcall(vim.cmd, "wincmd w")
 		-- [][(x) ()]
 	elseif not is_farthest_right then
